@@ -1,14 +1,14 @@
+'use strict';
+console.log("Module loaded")
 var S3Adapter = require('./lib/s3-adapter');
 
-function EmberDeployS3Index() {
-  this.name = 'ember-deploy-s3-index';
-  this.type = 'ember-deploy-addon';
+module.exports = {
+  name: 'ember-deploy-s3-index',
+  type: 'ember-deploy-addon',
 
-  this.adapters = {
+  adapters: {
     index: {
       'S3': S3Adapter
     }
-  };
-}
-
-module.exports = EmberDeployS3Index;
+  }
+};

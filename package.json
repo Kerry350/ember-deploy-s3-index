@@ -10,11 +10,11 @@
   ],
   "author": "Kerry Gallagher",
   "license": "MIT",
-  "private": true,
   "devDependencies": {
     "ember-cli": "^0.1.15"
   },
   "dependencies": {
+    "aws-sdk": "^2.1.10",
     "chalk": "^0.5.1",
     "ember-deploy": "^0.3.1",
     "s3": "^4.3.1"
