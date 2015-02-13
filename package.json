@@ -1,0 +1,22 @@
+{
+  "name": "ember-deploy-s3-index",
+  "version": "0.0.1",
+  "description": "ember-deploy index-adapter for Amazon S3",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ember-addon"
+  ],
+  "author": "Kerry Gallagher",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "ember-cli": "^0.1.15"
+  },
+  "dependencies": {
+    "chalk": "^0.5.1",
+    "ember-deploy": "^0.3.1",
+    "s3": "^4.3.1"
+  }
+}
