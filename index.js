@@ -1,5 +1,5 @@
 'use strict';
-console.log("Module loaded")
+
 var S3Adapter = require('./lib/s3-adapter');
 
 module.exports = {
