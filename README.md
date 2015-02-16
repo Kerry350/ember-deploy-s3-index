@@ -13,6 +13,38 @@ The adapter has two modes `directServe` and `proxyServe`. With `directServe` the
 
 Amazon have documentation on setting up your bucket in this way [here](http://docs.aws.amazon.com/AmazonS3/latest/dev/WebsiteHosting.html) 
 
-`proxyServe` assumes you have a backend server setup of some kind, and are using S3 as a storage mechanism rather than the host itself. Using this mode you would query your S3 bucket directly, and serve the results, just like lookups with the default Redis adapter. On application boot you could query for the `current` implementation which would be that represented by `index.html`, store this in memory, and serve on consequent requests. If a revision was requested via a query parameter you can query the bucket for the revision `index-<app-name>:<sha>.html` and serve what's returned. 
+`proxyServe` assumes you have a backend server setup of some kind, and are using S3 as a storage mechanism rather than the host itself. Using this mode you would query your S3 bucket directly, and serve the results, just like lookups with the default Redis adapter. On application boot you could query for the `current` implementation which would be that represented by `index.html`, store this in memory, and serve on consequent requests. If a revision was requested via a query parameter you can query the bucket for the revision `index-<app-name>:<sha>.html` and serve what's returned.
 
+Realistically the add-on itself does very little differently between the two. The difference is in how end-users choose to use the files in the bucket.
 
+# File representation
+
+- `index.html` will always represent your activated revision, or `current`.
+- Versions look like this: `index-<tag>.html`, for example `index-ember-deploy:44f2f92.html` if using the default SHA tagging adapter and with a project name of 'Ember Deploy'.  
+
+In your `deploy.json` you can specify a mode like this:
+
+```
+{
+  "development": {
+    "store": {
+      "type": "S3",
+      "accessKeyId": "<key>",
+      "secretAccessKey": "<key>",
+      "bucket": "my-index-bucket",
+      "mode": "directServe"
+    },
+
+    "assets": {
+      "type": "s3",
+      "accessKeyId": "<key>",
+      "secretAccessKey": "<key>",
+      "bucket": "my-assets-bucket"
+    }
+  }
+}
+``` 
+
+# Assumptions 
+
+This adapter assumes you are using a dedicated index bucket. Amazon S3 doesn't charge for buckets themselves but for usage so this shouldn't create an issue. This allows us to easily list all revisions, and set a `manifestSize`. I may extend this in the future to allow a 'mixed content' bucket, but this would mean testing to ensure files are a valid index file before assuming they're part of the list, and this could get messy. 
