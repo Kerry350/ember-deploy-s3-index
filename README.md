@@ -46,4 +46,62 @@ The add-on uses one set of logic, but allows you the freedom to use those files 
 
 # Assumptions 
 
-This adapter assumes you are using a dedicated index bucket. Amazon S3 doesn't charge for buckets themselves but for usage so this shouldn't create an issue. This allows us to easily list all revisions, and set a `manifestSize`. I may extend this in the future to allow a 'mixed content' bucket, but this would mean testing to ensure files are a valid index file before assuming they're part of the list, and this could get messy. 
+This adapter assumes you are using a dedicated index bucket. Amazon S3 doesn't charge for buckets themselves but for usage so this shouldn't create an issue. This allows us to easily list all revisions, and set a `manifestSize`. I may extend this in the future to allow a 'mixed content' bucket, but this would mean testing to ensure files are a valid index file before assuming they're part of the list, and this could get messy.
+
+# Getting an app deployed
+
+1) Make an ember-cli generated app (you probably already have one): `ember new <app-name>`
+2) Add relevant packages to your `package.json`:
+
+```
+npm install --save-dev ember-deploy
+npm install --save-dev ember-deploy-s3
+npm install --save-dev ember-deploy-s3-index
+```
+
+3) Create an Amazon S3 Bucket for holding your index files 
+4) Create a `deploy.json` file in the root of your project
+5) Fill out your credentials (add a block for each environment):
+
+```
+{
+  "development": {
+    "store": {
+      "type": "S3",
+      "accessKeyId": "<key>",
+      "secretAccessKey": "<key>",
+      "bucket": "<index bucket>"
+    },
+
+    "assets": {
+      "type": "s3",
+      "accessKeyId": "<key>",
+      "secretAccessKey": "<key>",
+      "bucket": "<assets bucket>"
+    }
+  }
+}
+```
+
+6) Once you've made some changes to your project, commit them
+7) Deploy those changes with `ember deploy`, this will deploy your assets and your index file revision. The revision number is based on commit SHAs by default.
+8) Your index bucket will now contain an object like this: `deployment-app:b412598.html`
+9) We can run `ember deploy:list` to see all revisions:
+
+```
+Found the following revisions:
+
+1) deployment-app:b412598
+
+Use activate() to activate one of these revisions
+``` 
+
+10) To swap the contents of our `current` representation (that of `index.html`) to a revision run `ember deploy:activate --revision deployment-app:b412598`
+11) Now you can either serve your `index.html` file directly from your bucket (using Amazon's static site hosting mode), or merely use this as a storage mechanism for your server to query.
+
+** `deployment-app:b412598` is used as an example here, you'll have different mileage depending on your project's name and the tagging adapter in use
+
+
+
+
+
