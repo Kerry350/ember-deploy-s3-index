@@ -51,4 +51,8 @@ This adapter assumes you are using a dedicated index bucket. Amazon S3 doesn't c
 - Tests
 - Better error handling (some errors are swallowed)
 
+# Guide 
+
+For detailed instructions on how to use all of these addons to deploy an app to S3, with revisioning and previewing capabilities there's an article [here](http://kerrygallagher.co.uk/deploying-an-ember-cli-application-to-amazon-s3/).
+
 
