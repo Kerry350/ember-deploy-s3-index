@@ -49,7 +49,6 @@ This adapter assumes you are using a dedicated index bucket. Amazon S3 doesn't c
 # TODOS
 
 - Tests
-- Better error handling (some errors are swallowed)
 
 # Guide 
 
