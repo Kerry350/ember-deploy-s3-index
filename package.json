@@ -3,19 +3,21 @@
   "version": "0.1.1",
   "description": "ember-deploy index-adapter for Amazon S3",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node node_tests/runner.js"
   },
   "keywords": [
     "ember-addon"
   ],
   "author": "Kerry Gallagher",
   "license": "MIT",
-  "repository" :
-    { "type" : "git",
-      "url" : "https://github.com/Kerry350/ember-deploy-s3-index.git"
-    },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Kerry350/ember-deploy-s3-index.git"
+  },
   "devDependencies": {
-    "ember-cli": "^0.1.15"
+    "ember-cli": "^0.1.15",
+    "glob": "^4.4.2",
+    "mocha": "^2.1.0"
   },
   "dependencies": {
     "aws-sdk": "^2.1.10",
