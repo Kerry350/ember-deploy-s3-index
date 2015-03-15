@@ -54,4 +54,19 @@ This adapter assumes you are using a dedicated index bucket. Amazon S3 doesn't c
 
 For detailed instructions on how to use all of these addons to deploy an app to S3, with revisioning and previewing capabilities there's an article [here](http://kerrygallagher.co.uk/deploying-an-ember-cli-application-to-amazon-s3/).
 
+# Using History-Location
+You can deploy your Ember application to S3 and still use the history-api for pretty URLs. This needs some configuration tweaking in your bucket's static-website-hosting options in the AWS console though. You can use S3's `Redirection Rules`-feature to redirect user's to the correct route based on the URL they are requesting from your app:
 
+```
+<RoutingRules>
+    <RoutingRule>
+        <Condition>
+            <HttpErrorCodeReturnedEquals>404</HttpErrorCodeReturnedEquals>
+        </Condition>
+        <Redirect>
+            <HostName><your-bucket-endpoint-from-static-website-hosting-options></HostName>
+            <ReplaceKeyPrefixWith>#/</ReplaceKeyPrefixWith>
+        </Redirect>
+    </RoutingRule>
+</RoutingRules>
+```
