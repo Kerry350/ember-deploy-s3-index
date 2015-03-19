@@ -30,7 +30,8 @@ The add-on uses one set of logic, but allows you the freedom to use those files 
       "accessKeyId": "<key>",
       "secretAccessKey": "<key>",
       "bucket": "my-index-bucket",
-      "hostName": "my-index-bucket.s3-my-region.amazonaws.com"
+      "hostName": "my-index-bucket.s3-my-region.amazonaws.com",
+      "prefix": "puppies-" // Optional: Add a prefix to revisions, useful for multi-app buckets, or maybe even certain types of A/B testing etc
     },
 
     "assets": {
