@@ -29,7 +29,8 @@ The add-on uses one set of logic, but allows you the freedom to use those files 
       "type": "S3",
       "accessKeyId": "<key>",
       "secretAccessKey": "<key>",
-      "bucket": "my-index-bucket"
+      "bucket": "my-index-bucket",
+      "hostName": "my-index-bucket.s3-my-region.amazonaws.com"
     },
 
     "assets": {
