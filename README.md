@@ -20,29 +20,33 @@ The add-on uses one set of logic, but allows you the freedom to use those files 
 - `index.html` will always represent your activated revision, or `current`.
 - Versions look like this: `<revisionTag>.html`, for example `ember-deploy:44f2f92.html` if using the default SHA tagging adapter and with a project name of 'Ember Deploy'.  
 
-# `deploy.json`
+# `deploy.js`
 
 ```
-{
-  "development": {
-    "store": {
-      "type": "S3",
-      "accessKeyId": "<key>",
-      "secretAccessKey": "<key>",
-      "bucket": "my-index-bucket",
-      "hostName": "my-index-bucket.s3-my-region.amazonaws.com",
-      "prefix": "puppies-" // Optional: Add a prefix to revisions, useful for multi-app buckets, or maybe even certain types of A/B testing etc
+module.exports = {
+  development: {
+    store: {
+      type: "S3",
+      accessKeyId: "ID",
+      secretAccessKey: "KEY",
+      bucket: "BUCKET",
+      hostName: "my-index-bucket.s3-my-region.amazonaws.com",
+      indexMode: "indirect", // Optional: 'direct' or 'indirect', 'direct' is used by default.
     },
 
-    "assets": {
-      "type": "s3",
-      "accessKeyId": "<key>",
-      "secretAccessKey": "<key>",
-      "bucket": "my-assets-bucket"
+    assets: {
+      type: "s3",
+      accessKeyId: "ID",
+      secretAccessKey: "KEY",
+      bucket: "BUCKET"
     }
   }
 }
 ``` 
+
+# `indexMode`
+
+Direct assumes you're serving your app directly from the bucket, using the static site hosting mode. It uses `putBucketWebsite` to update the Index Document equal to the revision. Indirect doesn't make any strict assumptions, but you'd probably be using the bucket as a storage mechanism only. With indirect an `index.html` file is updated to match the contents of a revision, so at any point there's a concept of 'current' for a server to query against. 
 
 # Assumptions 
 
