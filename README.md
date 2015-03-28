@@ -30,8 +30,9 @@ module.exports = {
       accessKeyId: "ID",
       secretAccessKey: "KEY",
       bucket: "BUCKET",
-      hostName: "my-index-bucket.s3-my-region.amazonaws.com",
+      hostName: "my-index-bucket.s3-my-region.amazonaws.com", // To be set with 'direct' indexMode
       indexMode: "indirect", // Optional: 'direct' or 'indirect', 'direct' is used by default.
+      prefix: "app-one/" // Optional: Allows a folder setup within the bucket, so that multiple apps can be stored in one bucket (or maybe things like A/B testing grouped together). Use with 'indirect' indexMode only.       
     },
 
     assets: {
