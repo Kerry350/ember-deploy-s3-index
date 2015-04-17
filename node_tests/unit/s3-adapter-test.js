@@ -1,25 +1,44 @@
 'use strict';
 
-var assert    = require('assert');
+var chai = require('chai');
+var expect = chai.expect;
 var S3Adapter = require('../../lib/s3-adapter');
+var adapter;
 
-describe('S3Adapter tests', function() {
-  var adapter;
-
-  it('requires config to instantiate S3 Adapter', function() {
-
-    assert.throws(function() {
-      new S3Adapter();
-    }, function(error) {
-      return ('You must supply a config' === error.message);
-    }, "Should error when not supplying a config on instantiation");
-
-    assert.doesNotThrow(function() {
-      new S3Adapter({
-        config: {}
-      });
-    }, "Should not error when supplied a config on instantiation");
-
+describe('S3 Adapter tests', function() {
+  beforeEach('Reset adapter instance', function(done) {
+    adapter = new S3Adapter({
+      config: {}
+    });
+    done();
   });
 
+  describe('Config option tests', function() {
+    context('Config supplied', function() {
+      it('Does not throw an error', function() {
+        expect(function() {
+          new S3Adapter({config: {}});
+        }).to.not.throw(Error);
+      });
+    });
+
+    context('Config not supplied', function() {
+      it('Throws an error', function() {
+        expect(function() {
+          new S3Adapter()
+        }).to.throw(Error);
+      });
+    });
+
+    context('prefix option has been set', function() {
+      it('Should throw an error when indexMode is not equal to indirect', function() {
+        expect(function() {
+          new S3Adapter({config: {
+            prefix: '/kittens',
+            indexMode: 'direct'
+          }});
+        }).to.throw(Error);
+      });
+    });
+  });
 });
