@@ -16,9 +16,12 @@
   },
   "devDependencies": {
     "chai": "^2.2.0",
+    "chai-as-promised": "^5.0.0",
     "ember-cli": "^0.1.15",
     "glob": "^4.4.2",
-    "mocha": "^2.1.0"
+    "mocha": "^2.1.0",
+    "sinon": "^1.14.1",
+    "sinon-chai": "^2.7.0"
   },
   "dependencies": {
     "aws-sdk": "^2.1.10",
