@@ -250,4 +250,13 @@ describe('S3 Adapter tests', function() {
       });
     });
   });
+
+  describe('#_getItemsForDeletion', function() {
+    it('Should return the correct items to delete, based on sort order', function(done) {
+      adapter.manifestSize = 1;
+      expect(adapter._getItemsForDeletion(adapter.S3.bucketContents)[0]).to.equal('3.html');
+      expect(adapter._getItemsForDeletion(adapter.S3.bucketContents)[1]).to.equal('1.html');
+      done();
+    });
+  });
 });
