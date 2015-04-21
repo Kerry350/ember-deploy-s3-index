@@ -259,4 +259,17 @@ describe('S3 Adapter tests', function() {
       done();
     });
   });
+
+  describe('#_removeCurrentRevisionFromContents', function() {
+    it('Should remove the current revision from the bucket contents', function(done) {
+      adapter.S3.bucketContents.Contents.push({Key: 'index.html'});
+      adapter._removeCurrentRevisionFromContents(adapter.S3.bucketContents);
+      expect(adapter.S3.bucketContents.Contents.length).to.equal(3);
+      var isInContent = adapter.S3.bucketContents.Contents.filter(function(el, index, arr) {
+        return el.Key === 'index.html';
+      });
+      expect(isInContent.length).to.equal(0);
+      done();
+    });
+  });
 });
