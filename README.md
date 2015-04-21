@@ -81,7 +81,7 @@ This adapter assumes you are using a dedicated index bucket. Amazon S3 doesn't c
 
 # TODOS
 
-- Tests
+- Improve tests
 
 # Guide
 
