@@ -236,4 +236,18 @@ describe('S3 Adapter tests', function() {
       done();
     });
   });
+
+  describe('#_cleanupBucket', function() {
+    it('Should keep bucket items within the manifest limit by delegating to S3s deleteObjects', function(done) {
+      adapter.manifestSize = 1;
+      sinon.spy(adapter.S3, 'deleteObjects');
+      return adapter
+      ._cleanupBucket()
+      .then(function() {
+        expect(adapter.S3.deleteObjects).to.have.been.called;
+        expect(adapter.S3.deleteObjects.args[0][0].Delete.Objects.length).to.equal(2);
+        done();
+      });
+    });
+  });
 });
