@@ -227,4 +227,13 @@ describe('S3 Adapter tests', function() {
       done();
     });
   });
+
+  describe('#_sortBucketContent', function() {
+    it('Should sort the contents by LastModified date', function(done) {
+      expect(adapter._sortBucketContent(adapter.S3.bucketContents).Contents[0].Key).to.equal('2.html');
+      expect(adapter._sortBucketContent(adapter.S3.bucketContents).Contents[1].Key).to.equal('3.html');
+      expect(adapter._sortBucketContent(adapter.S3.bucketContents).Contents[2].Key).to.equal('1.html');
+      done();
+    });
+  });
 });
