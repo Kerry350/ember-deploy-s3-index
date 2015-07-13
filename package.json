@@ -26,6 +26,7 @@
   "dependencies": {
     "aws-sdk": "^2.1.10",
     "chalk": "^0.5.1",
-    "core-object": "^1.1.0"
+    "core-object": "^1.1.0",
+    "silent-error": "^1.0.0"
   }
 }
