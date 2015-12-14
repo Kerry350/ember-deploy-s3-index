@@ -30,6 +30,7 @@ module.exports = {
       accessKeyId: "ID",
       secretAccessKey: "KEY",
       bucket: "BUCKET",
+      region: "ap-southeast-2", // if your bucket isn't in us-east-1
       acl: 'public-read', //optional, e.g. 'public-read', if ACL is not configured, it is not sent
       hostName: "my-index-bucket.s3-my-region.amazonaws.com", // To be set with 'direct' indexMode
       indexMode: "indirect", // Optional: 'direct' or 'indirect', 'direct' is used by default.
@@ -40,7 +41,8 @@ module.exports = {
       type: "s3",
       accessKeyId: "ID",
       secretAccessKey: "KEY",
-      bucket: "BUCKET"
+      bucket: "BUCKET",
+      region: "ap-southeast-2" // if your bucket isn't in us-east-1
     }
   }
 }
